@@ -3,9 +3,9 @@ const { routerProducts } = require('./routesProducts');
 const { routerServices } = require('./routesServices');
 const swaggerUI = require('swagger-ui-express');
 const YAML = require('yamljs');
-const swaggerDocsJSON = require('./documentation/products.json');
+const swaggerDocsJSON = require('./documentation/products-doc.json');
 
-const swaggerDocsYAML = YAML.load('./src/documentation/products.yaml')
+const swaggerDocsYAML = YAML.load('./src/documentation/products-doc.yaml')
 
 const app = express();
 app.use(express.json());

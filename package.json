@@ -8,7 +8,10 @@
     "start": "node ./src/app.js",
     "dev": "nodemon ./src/app.js",
     "generate-doc": "npx redoc-cli build --options=./redoc-options.json --output ./statics/index.html ./src/swagger.json",
-    "generate-doc-YAML": "npx redoc-cli build --options=./redoc-options.json --output ./statics/index.html ./src/swagger.yaml"
+    "generate-doc-YAML": "npx redoc-cli build --options=./redoc-options.json --output ./statics/index.html ./src/swagger.yaml",
+    "build-docs": "swagger-cli bundle src/documentation/products-doc.json --outfile _build/openapi.json --type json",
+    "preview-docs": "npm run build-docs && redoc-cli serve _build/openapi.json --options.onlyRequiredInSamples",
+    "generate-docs": "npm run build-docs && redoc-cli build _build/openapi.json  --output _build/index.html --options=./redoc-options.json"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +19,7 @@
   "dependencies": {
     "express": "^4.18.1",
     "redoc-cli": "^0.13.20",
+    "swagger-cli": "^4.0.4",
     "swagger-ui-express": "^4.5.0",
     "uuid": "^9.0.0",
     "yamljs": "^0.3.0"
