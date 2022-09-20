@@ -1,0 +1,192 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de manipulação de produtos",
+        "description": "Essa API tem como objetivo a manipulaão dos produtos",
+        "termsOfService": "http://localhost:3000/terms",
+        "contact": {
+            "name": "Raquel de Queiroz",
+            "email": "martin@xxxx.xxxx"
+        },
+        "version": "1.0.0"
+    },
+    "servers":[
+        {
+            "url": "http://localhost:3000",
+            "description": "API de teste"
+        },
+        {
+            "url": "http://localhost:3000",
+            "description": "API de produção"
+        }
+    ],
+    "tags":[
+        {
+            "name": "Products",
+            "description": "CRUD para products"
+        }
+    ],
+    "paths":{
+        "/products":{
+            "post": {
+                "summary": "Cadastro de produtos",
+                "description": "Cadastrar novos produtos",
+                "tags": ["Products"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Product"
+                            },
+                            "examples": {
+                                "product":{
+                                    "value":{
+                                        "name": "Notebook",
+                                        "description": "Notebook última geração",
+                                        "price": 15000
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "400": {
+                        "description": "Product already exists!"
+                    },
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    }
+
+                }
+            },
+            "get": {
+                "summary": "lista de produtos",
+                "description": "Lista todos os produtos",
+                "tags": ["Products"],
+                "responses":{
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        },
+        "/products/{id}": {
+            "get": {
+                "description": "Busca de um produto pelo id",
+                "summary": "Busca de produto pelo id",
+                "tags": ["Products"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do produto",
+                        "required": true
+                    }
+                ],
+                "responses":{
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    }
+
+                }
+            },
+            "put": {
+                "description": "Alerar um produto pelo id",
+                "summary": "Alterar um produto pelo id",
+                "tags": ["Products"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do produto",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Product"
+                            },
+                            "examples": {
+                                "product":{
+                                    "value":{
+                                        "name": "Notebook com teclado numérico",
+                                        "description": "Notebook última geração com teclado numérico",
+                                        "price": 18000
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Product": {
+                "type": "object",
+                "properties": {
+                    "name":{
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "price":{
+                        "type": "number"
+                    },
+                    "id":{
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

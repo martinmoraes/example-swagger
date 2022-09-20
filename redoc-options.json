@@ -1,0 +1,8 @@
+{
+  "hideDownloadButton": true,
+  "theme": {
+    "logo": {
+      "gutter": "15px"
+    }
+  }
+}
